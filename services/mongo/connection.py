@@ -12,4 +12,4 @@ try:
 except:
     connection = os.environ.get('Connection')
 
-client = pymongo.MongoClient(parameters['Connection'])
+client = pymongo.MongoClient(connection)
