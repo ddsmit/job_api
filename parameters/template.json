@@ -1,1 +1,4 @@
-{"Connection": "<put your MongoDB connection string here>"}
+{
+  "db": "<for now, the only available option is Mongo. This item will eventually tell the system what db is used>",
+  "Connection": "<Put your Mongo connection string here.>"
+}

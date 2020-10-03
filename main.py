@@ -1,25 +1,25 @@
 from fastapi import FastAPI
-from models.job import Job
-from services.mongo import get, post
+from routers.jobs import jobs_router
+from routers.companies import companies_router
+from routers.contacts import contacts_router
+
 
 app = FastAPI()
 
-@app.get('/jobs/')
-async def get_job(
-        company_name: str = None,
-        title: str = None,
-        closed: bool = False,
-):
-    return get.job(
-        Company=company_name,
-        Title=title,
-        # closed=closed,
-    )
+app.include_router(
+    jobs_router,
+    prefix='/jobs',
+    tags=['jobs'],
+)
 
-@app.get('/jobs')
-async def get_jobs():
-    return get.jobs()
+app.include_router(
+    companies_router,
+    prefix='/companies',
+    tags=['companies'],
+)
 
-@app.post('/jobs/')
-async def create_job(job: Job):
-    return post.job(job)
+app.include_router(
+    contacts_router,
+    prefix='/contacts',
+    tags=['contacts'],
+)

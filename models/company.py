@@ -1,8 +1,9 @@
 from pydantic import BaseModel
 from typing import Optional, List
-from models.contact import Contact
+from models.people import Contact
 import datetime
 
 class Company(BaseModel):
-    Name: str
-    Desc: Optional[str]
+    id: Optional[str] = None
+    Name: Optional[str] = None
+    Desc: Optional[str] = None

@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, List
-from models.contact import Contact
+from models.people import Contact
+from models.company import Company
 import datetime
 
 class Status(BaseModel):
@@ -15,7 +16,8 @@ class Statuses(BaseModel):
     Rejected: Status
 
 class Job(BaseModel):
-    Company: str
+    UserID: str
+    Company: Company
     Title: str
     Statuses: Statuses
     Location: str

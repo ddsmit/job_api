@@ -1,27 +1,26 @@
-import pymongo
+from services.mongo.response import validate_search, bson_to_json
 from services.mongo.connection import client
-from services.mongo import response
 
 db = client.jobs
 
-def job(
-        **kwargs
-):
-    return [
-        job
-        for job in db.jobs.find(
-            {
-                k:v
-                for k, v in kwargs.items()
-                if v
-            },
-            {'_id':0}
-        )
-    ]
+def job(**search_criteria):
+    search_criteria = validate_search(search_criteria)
+    jobs_loaded = db.jobs.find(search_criteria,)
+    return bson_to_json(jobs_loaded)
 
 def jobs():
-    return [job for job in db.jobs.find({},{'_id':0})]
+    return bson_to_json(db.jobs.find({}))
 
-def company(name=None,id=None):
-    return
+def company(**search_criteria):
+    search_criteria = validate_search(search_criteria)
+    company_loaded = db.companies.find(search_criteria)
+    return bson_to_json(company_loaded)
+
+def companies():
+    return bson_to_json(db.companies.find({}))
+
+def contact(**search_criteria):
+    search_criteria = validate_search(search_criteria)
+    company_loaded = db.companies.find(search_criteria)
+    return bson_to_json(company_loaded)
 
