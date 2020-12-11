@@ -1,4 +1,0 @@
-{
-  "db": "mongo",
-  "Connection": "mongodb+srv://ddsmit:rZui6xKQJGXuMkU@cluster0.irnct.mongodb.net/Cluster0?retryWrites=true&w=majority"
-}
