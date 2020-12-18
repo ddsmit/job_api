@@ -3,23 +3,23 @@ from services.mongo.connection import client
 
 db = client.jobs
 
-def job(**search_criteria):
+async def job(**search_criteria):
     search_criteria = validate_search(search_criteria)
     jobs_loaded = db.jobs.find(search_criteria,)
     return bson_to_json(jobs_loaded)
 
-def jobs():
+async def jobs():
     return bson_to_json(db.jobs.find({}))
 
-def company(**search_criteria):
+async def company(**search_criteria):
     search_criteria = validate_search(search_criteria)
     company_loaded = db.companies.find(search_criteria)
     return bson_to_json(company_loaded)
 
-def companies():
+async def companies():
     return bson_to_json(db.companies.find({}))
 
-def contact(**search_criteria):
+async def contact(**search_criteria):
     search_criteria = validate_search(search_criteria)
     company_loaded = db.companies.find(search_criteria)
     return bson_to_json(company_loaded)

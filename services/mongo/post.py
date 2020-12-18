@@ -5,7 +5,7 @@ from services.mongo.connection import client
 db = client.jobs
 
 
-def job(job):
+async def job(job):
     if not job.Company.id:
         job.Company = company(job.Company)
     if not job.PrimaryContact.id and job.PrimaryContact.Name:
@@ -14,12 +14,12 @@ def job(job):
     db.jobs.insert_one(job.dict())
 
 
-def company(company):
+async def company(company):
     company = company.dict()
     company.pop('id')
     return db.companies.insert_one(company).inserted_id
 
 
-def contact(contact):
+async def contact(contact):
     return db.contacts.insert_one(contact.dict()).inserted_id
 

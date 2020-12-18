@@ -5,7 +5,7 @@ from services.mongo.connection import client
 
 db = client.jobs
 
-def job(id, job):
+async def job(id, job):
     if not job.Company.id:
         job.Company = post.company(job.Company)
     if not job.PrimaryContact.id and job.PrimaryContact.Name:
