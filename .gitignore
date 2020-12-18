@@ -2,4 +2,4 @@ mongo.json
 venv
 .idea
 __pycache__
-
+*parameters*
