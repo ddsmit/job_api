@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from models.job import Job
+from models.job import Job, JobUpdate
 import config
 get, post, update, delete = config.source()
 
@@ -33,7 +33,7 @@ async def get_jobs():
 @router.put('/<id>')
 async def update_job(
         id: str,
-        job: Job,
+        job: JobUpdate,
 ):
     return update.job(id, job)
 
