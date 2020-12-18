@@ -1,9 +1,11 @@
-from pydantic import BaseModel
-from typing import Optional, List
-from models.people import Contact
-import datetime
+from pydantic import BaseModel, Field
+from typing import Optional
+import uuid
 
 class Company(BaseModel):
-    id: Optional[str] = None
+    id: str = Field(default_factory=uuid.uuid4, alias='_id')
     Name: Optional[str] = None
     Desc: Optional[str] = None
+
+    class Config:
+        allow_population_by_field_name = True

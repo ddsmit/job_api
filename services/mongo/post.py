@@ -1,25 +1,26 @@
 import pymongo
 from services.mongo.response import populate_date
 from services.mongo.connection import client
-
+from fastapi.encoders import jsonable_encoder
 db = client.jobs
 
 
 async def job(job):
     if not job.Company.id:
-        job.Company = company(job.Company)
+        job.Company = await company(job.Company)
     if not job.PrimaryContact.id and job.PrimaryContact.Name:
-        job.PrimaryContact = contact(job.PrimaryContact)
-    job = populate_date(job)
-    db.jobs.insert_one(job.dict())
+        job.PrimaryContact = await contact(job.PrimaryContact)
+    job = await populate_date(job)
+    job = jsonable_encoder(job)
+    db.jobs.insert_one(job)
 
 
 async def company(company):
-    company = company.dict()
-    company.pop('id')
+    company = jsonable_encoder(company)
     return db.companies.insert_one(company).inserted_id
 
 
 async def contact(contact):
-    return db.contacts.insert_one(contact.dict()).inserted_id
+    contact = jsonable_encoder(contact)
+    return db.contacts.insert_one(contact).inserted_id
 
