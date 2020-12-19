@@ -8,9 +8,9 @@ contacts_router = router = APIRouter()
 async def get_contact(
         id: str
 ):
-    return get.contact(_id=id)
+    return await get.contact(_id=id)
 
 
 @router.delete('')
 async def delete_contacts():
-    return delete.all_contacts()
+    return await delete.all_contacts()

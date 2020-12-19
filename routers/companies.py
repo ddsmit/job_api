@@ -7,17 +7,17 @@ companies_router = router = APIRouter()
 
 @router.get('')
 async def get_companies():
-    return get.companies()
+    return await get.companies()
 
 
 @router.get('/<id>')
 async def get_company(
         id: str
 ):
-    return get.company(_id=id)
+    return await get.company(_id=id)
 
 
 @router.delete('')
 async def delete_companies():
-    return delete.all_companies()
+    return await delete.all_companies()
 
