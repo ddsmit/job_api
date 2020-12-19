@@ -1,27 +1,40 @@
 from services.mongo.response import validate_search, bson_to_json
 from services.mongo.connection import client
-from fastapi.encoders import jsonable_encoder
 
 db = client.jobs
 
+
 async def job(**search_criteria):
-    search_criteria = validate_search(search_criteria)
-    jobs_loaded = db.jobs.find(search_criteria,)
-    return jsonable_encoder(jobs_loaded)
+    search_criteria = await validate_search(search_criteria)
+    print(search_criteria)
+    return await bson_to_json(
+        await db.jobs.find(search_criteria).to_list(100)
+    )
+
 
 async def jobs():
-    return jsonable_encoder(db.jobs.find({}))
+    return await bson_to_json(
+        await db.jobs.find({}).to_list(100)
+    )
+
 
 async def company(**search_criteria):
-    search_criteria = validate_search(search_criteria)
-    company_loaded = db.companies.find(search_criteria)
-    return jsonable_encoder(company_loaded)
+    search_criteria = await validate_search(search_criteria)
+    return await bson_to_json(
+        await db.companies.find(search_criteria).to_list(100)
+    )
+
 
 async def companies():
-    return jsonable_encoder(db.companies.find({}))
+    return await bson_to_json(
+        await db.companies.find({}).to_list(100)
+    )
+
 
 async def contact(**search_criteria):
-    search_criteria = validate_search(search_criteria)
-    company_loaded = db.companies.find(search_criteria)
-    return jsonable_encoder(company_loaded)
+    search_criteria = await validate_search(search_criteria)
+    print(search_criteria)
+    return await bson_to_json(
+        await db.companies.find(search_criteria).to_list(100)
+    )
 

@@ -36,12 +36,12 @@ class Job(BaseModel):
 
 
 class JobUpdate(BaseModel):
-    UserID: str
-    Company: Company
-    Title: str
+    UserID: Optional[str] = ""
+    Company: Optional[str] = ""
+    Title: Optional[str] = ""
     Statuses: Statuses
-    Location: str
-    PrimaryContact: Optional[Contact] = None
+    Location: Optional[str] = ""
+    PrimaryContact: Optional[str] = ""
     Notes: Optional[str] = ""
     Salary: Optional[float] = ""
     Requirements: Optional[List[str]] = []

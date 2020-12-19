@@ -13,7 +13,7 @@ async def id_to_bson(id):
 
 
 async def validate_search(criteria):
-    criteria = input_to_bson(criteria)
+    # criteria = await input_to_bson(criteria)
     return {
         k:v
         for k, v in criteria.items()
