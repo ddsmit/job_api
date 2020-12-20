@@ -5,16 +5,16 @@ db = client.jobs
 
 
 async def all_jobs():
-    db.jobs.delete_many({})
+    await db.jobs.delete_many({})
 
 
 async def job(id):
-    db.jobs.delete_many({'_id':id_to_bson(id)})
+    await db.jobs.delete_many({'_id':id_to_bson(id)})
 
 
 async def all_companies():
-    db.companies.delete_many({})
+    await db.companies.delete_many({})
 
 
 async def all_contacts():
-    db.contacts.delete_many({})
+    await db.contacts.delete_many({})
